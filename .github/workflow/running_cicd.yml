@@ -1,0 +1,22 @@
+name: Run test with cicd
+
+on: [push]
+
+job:
+  run_api_automation:
+    runs-on: unbutu-latest
+    steps:
+     - user: actions/checkout@v3
+     - name: Set up Python
+       uses: action/setup-python@v3
+       with:
+        python-version: '3.x'
+
+
+    - name: Install dependencies
+       run:
+        pyhon -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run test with pytest
+       run: pytest test -v
